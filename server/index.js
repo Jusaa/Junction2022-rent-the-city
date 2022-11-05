@@ -48,7 +48,8 @@ app.get('/api/categories', async (req, res) => {
 
 app.get('/api/bookable-items', async (req, res) => {
   try {
-    res.send(await BookableItem.findAll());
+    const bo = await BookableItem.findAll({ include: [ { model: RentalEvent, include: { model: Lender, include: { model: User, include: [Address]}} }]});
+    res.send(bo);
   } catch (error) {
     res.send(error)
   }
