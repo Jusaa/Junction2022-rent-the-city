@@ -12,6 +12,7 @@ const {
   initializeDb, 
 } = require('./models');
 const { bookableItems } = require('./data/initialData');
+const { bookItem } = require('./apiconnector');
 
 app.use(cors());
 app.use(express.json());
@@ -86,6 +87,18 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
             res.status(500).send({error: e});
         }
     }
+});
+
+app.post('/api/book-item', async (req, res) => {
+  const { userId, itemId } = req.body;
+  // TODO: add also scheded return
+  try {
+    const a = await bookItem();
+    console.log(a);
+    res.send('hieno juttu');
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 app.listen(port, () => {
