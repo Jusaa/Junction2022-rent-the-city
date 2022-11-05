@@ -94,22 +94,6 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
     }
 });
 
-app.post('/api/pre-book-item', async (req, res) => {
-  const { lenderId, borrowerId, itemId, lenderAddress, borrowerAddress } = req.body;
-  try {
-    const [user, item] = await Promise.all([
-      Lender.findByPk(lenderId),
-      BookableItem.findByPk(itemId)
-    ]);
-
-    const a = await bookItem(item.name, lenderAddress, borrowerAddress);
-    console.log(a.data);
-    res.send('hieno juttu');
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
 app.post('/api/book-item', async (req, res) => {
   const { lenderId, borrowerId, itemId, lenderAddress, borrowerAddress } = req.body;
   try {

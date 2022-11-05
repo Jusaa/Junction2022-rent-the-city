@@ -1,1 +1,8 @@
 POST http://localhost:8080/api/book-item
+Content-Type: Application/Json
+
+{
+    "itemId": 1,
+    "lenderId": 1,
+    "borrowerId": 1
+}
