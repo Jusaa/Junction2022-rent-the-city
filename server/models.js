@@ -119,6 +119,7 @@ Address.hasMany(Transport, { foreignKey: 'fromAddressId' });
 Address.hasMany(Transport, { foreignKey: 'toAddressId' });
 
 BookableItem.hasMany(RentalEvent);
+RentalEvent.hasOne(BookableItem);
 
 Lender.hasMany(RentalEvent);
 Borrower.hasMany(RentalEvent);
@@ -163,5 +164,6 @@ module.exports = {
     Address,
     Transport,
     WoltShipment,
+    RentalEvent,
     initializeDb,
 };
