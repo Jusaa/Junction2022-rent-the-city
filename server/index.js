@@ -95,21 +95,25 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
 });
 
 app.post('/api/book-item', async (req, res) => {
-  const { lenderId, borrowerId, itemId, lenderAddress, borrowerAddress } = req.body;
+  const { lenderId, borrowerId, itemId } = req.body;
   try {
     const [lender, borrower, item] = await Promise.all([
       Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
       Borrower.findByPk(borrowerId, { include: [ { model: User, include: [Address] }]}),
       BookableItem.findByPk(itemId)
     ]);
-    // const lenderAddressObject = await lender.user.getAddress();
-    console.log(borrower)
+
     const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
-    console.log(formattedBorrowerAddress);
+
     const a = await bookItem(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    console.log(a.data);
-    res.send('hieno juttu');
+    
+    if (a.status === 201) {
+      res.status(201).send(a.data);
+
+    }
+    res.status(400).send({ error: 'kaikki meni pieleen' });
+
   } catch (e) {
     res.status(400).send(e);
   }
