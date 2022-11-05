@@ -16,6 +16,30 @@ const bookableItems = [
         imageUrl: '/img/makitaDrill.jpg',
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
+    {
+        name: 'Makita saw',
+        description: 'Very good saw for cutting stuff in pieces.',
+        imageUrl: '/img/makitaSaw.png',
+        categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
+    },
+    {
+        name: 'Slip and slide',
+        description: 'For your slipping and sliding needs',
+        imageUrl: '/img/slip.jpeg',
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
+    },
+    {
+        name: 'Rocking horse',
+        description: 'Horse your way to happiness',
+        imageUrl: '/img/rocking.jpg',
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
+    },
+    {
+        name: 'Scooter',
+        description: 'Scooter perfect for kids',
+        imageUrl: '/img/rocking.jpg',
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
+    },
 ];
 
 const users = [
