@@ -18,7 +18,16 @@ const bookableItems = [
     },
 ];
 
+const users = [
+    {
+        name: 'Test Testerson',
+        email: 'test.testerson@test.com',
+        phoneNumber: '+3581234567',
+    }
+];
+
 module.exports = {
     categories,
     bookableItems,
+    users,
 }
