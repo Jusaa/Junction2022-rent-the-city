@@ -6,10 +6,13 @@ class LenderHome extends React.Component {
     constructor(props) {
         super(props);
       }
+    getUser = () => {
+        return this.props.getUser();
+    }
     render() {
         return (
             <div>
-                <Menu logout={true} user={this.props.state.user} className='Nav'></Menu>
+                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <p>List of my own items</p>
                     <ul className="App">
