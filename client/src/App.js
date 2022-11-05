@@ -23,11 +23,9 @@ class App extends React.Component {
   setUsername(name) {
     this.setState({ user: { name, role: this.state.user.role }})
   }
-
   setRole(role) {
     this.setState({ user: { name: this.state.user.name, role }})
   }
-
   getUser() {
     return this.state.user
   }

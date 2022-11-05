@@ -1,24 +1,33 @@
 import React from 'react'
 import Menu from './menu'
+import axios from 'axios'
 
 class BorrowerHome extends React.Component {
     constructor(props) {
         super(props);
       }
+    
+    componentDidMount() {
+        axios.get('http://localhost:8080/api/bookable-items')
+            .then(res => this.setState({items: res.data}))
+    }
     getUser = () => {
         return this.props.getUser();
     }
     render() {
+        console.log(this.state)
         return (
             <div className="App">
                 <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <p>Items available to rent</p>
                     <ul>
-                        <li>Item 1 - 5€ delivery in 30min - 10€/day</li>
-                        <li>Item 2 - 7€ delivery in 40min - 25€/day</li>
-                        <li>Item 3 - 10€ delivery in 50min - 5€/day</li>
-                        <li>Item 4 - 12€ delivery in 1h - 20€/day</li>
+                        {this.state && this.state.items && this.state.items.map((item) => {
+                            return (
+                                <li><img src={item.imageUrl} width="100" height="100" />
+                                    {item.name}, {item.description}</li>
+                            )}
+                        )}
                     </ul>
                 </div>
             </div>
