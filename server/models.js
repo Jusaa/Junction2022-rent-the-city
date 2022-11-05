@@ -13,7 +13,7 @@ Category.init({
 },
 {
     sequelize, 
-    modelName: 'Category',
+    modelName: 'category',
 });
 
 
@@ -25,25 +25,29 @@ BookableItem.init({
     },
     {
         sequelize, 
-        modelName: 'BookableItem',
+        modelName: 'bookableItem',
     });
 
 class BookableItemCategory extends Model {};
 BookableItemCategory.init({},
     {
         sequelize, 
-        modelName: 'BookableItemCategory',
+        modelName: 'bookableItemCategory',
     });
-    BookableItem.belongsToMany(Category, { through: BookableItemCategory });
+BookableItem.belongsToMany(Category, { through: BookableItemCategory });
+Category.belongsToMany(BookableItem, { through: BookableItemCategory });
 
 const initializeDb = async () => {
     console.log(categories);
     await sequelize.sync({ force: true });
-    const categoryBuilds = categories.map(x => Category.build(x).save());
-    await Promise.all(categoryBuilds);
+    const categoryCreates = categories.map(x => Category.create(x));
+    await Promise.all(categoryCreates);
 
-    const bookableItemBuilds = bookableItems.map(x => BookableItem.build(x).save());
-    await Promise.all(bookableItemBuilds);
+    const bookableItemCreates = bookableItems.map(x => BookableItem.create(
+        x, 
+        { include: [ Category ] })
+    );
+    await Promise.all(bookableItemCreates);
 };
 
 module.exports = {
