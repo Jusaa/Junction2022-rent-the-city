@@ -9,7 +9,7 @@ const preBookItem = (itemName, lenderAddress, borrowerAddress) => {
   
 }
 
-const bookItem = (itemName, lenderAddress, borrowerAddress) => {
+const bookItemShipment = (itemName, lenderAddress, borrowerAddress) => {
     return axios.post(`https://daas-public-api.development.dev.woltapi.com/merchants/${MERCHANT_ID}/delivery-order`,
         {
             "pickup": {
@@ -63,6 +63,6 @@ const bookItem = (itemName, lenderAddress, borrowerAddress) => {
 }
 
 module.exports = {
-    bookItem,
+    bookItemShipment,
     preBookItem,
 }
