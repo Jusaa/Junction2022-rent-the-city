@@ -64,7 +64,7 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
               description,
               imageUrl
           });
-          savedItem.addCategory(category);
+          await savedItem.addCategory(category);
           res.status(201).send(savedItem);
         } catch (e) {
             res.status(500).send({error: e});
