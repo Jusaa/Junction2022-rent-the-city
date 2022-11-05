@@ -6,18 +6,13 @@ class Signup extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = { role: 'borrower' };
   }
 
   setBorrower = () => {
-    this.setState(() => ({
-        role: 'borrower'
-    }));
+    this.props.state.role = 'borrower'
   };
   setLender = () => {
-    this.setState(() => ({
-        role: 'lender'
-    }));
+    this.props.state.role = 'lender'
   };
 
   render () {
@@ -47,9 +42,16 @@ class Signup extends React.Component {
             </div>
             </td></tr>
             <tr><td>
-            <Link to="/borrower/home">
-              <input type="submit" value="Sign up!"></input>
-            </Link>
+            {this.props.state.role == 'borrower' &&
+              <Link to="/borrower/home">
+                <input type="submit" value="Sign up"></input>
+              </Link>
+            }
+            {this.props.state.role == 'lender' &&
+              <Link to="/lender/home">
+                <input type="submit" value="Sign up!"></input>
+              </Link>
+            }
             </td></tr>
           </table>
         </form>
