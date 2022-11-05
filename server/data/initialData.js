@@ -16,6 +16,12 @@ const bookableItems = [
         imageUrl: '/img/makitaDrill.jpg',
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
+    {
+        name: 'Makita saw',
+        description: 'Very good saw for cutting stuff in pieces.',
+        imageUrl: '/img/makitaSaw.png',
+        categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
+    },
 ];
 
 const users = [
