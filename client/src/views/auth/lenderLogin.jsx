@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../header'
 
 class LenderLogin extends React.Component {
   render () {
     return (
-    <div>
-      <Link to="/">
-        <button>Back</button>
-      </Link>
+    <div className="App">
+      <Header back={true} />
         <form>
           <table>
             <tr><td>
