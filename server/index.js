@@ -51,6 +51,14 @@ app.get('/api/bookable-items', async (req, res) => {
   }
 });
 
+app.get('/api/bookable-items/:id', async (req, res) => {
+  try {
+    res.send(await BookableItem.findByPk(id));
+  } catch (error) {
+    res.send(error)
+  }
+});
+
 app.get('/api/reset', async (req, res) => {
   try {
     await initializeDb();
