@@ -5,12 +5,16 @@ const {
     MERCHANT_ID,
   } = require('./config')
   
-const bookItem = () => {
+const preBookItem = (itemName, lenderAddress, borrowerAddress) => {
+  
+}
+
+const bookItem = (itemName, lenderAddress, borrowerAddress) => {
     return axios.post(`https://daas-public-api.development.dev.woltapi.com/merchants/${MERCHANT_ID}/delivery-order`,
         {
             "pickup": {
               "location": {
-                  "formatted_address": "Saariniemenkatu 6, 00530 Helsinki"
+                  "formatted_address": lenderAddress
               },
               "comment": "The box is in front of the door",
               "contact_details": {
@@ -21,7 +25,7 @@ const bookItem = () => {
             },
             "dropoff": {
               "location": {
-                "formatted_address": "Otakaari 24, 02150 Espoo"
+                "formatted_address": borrowerAddress
               },
               "contact_details": {
                 "name": "John Doe's wife",
@@ -59,5 +63,6 @@ const bookItem = () => {
 }
 
 module.exports = {
-    bookItem
+    bookItem,
+    preBookItem,
 }
