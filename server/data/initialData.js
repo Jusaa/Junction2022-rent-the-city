@@ -34,6 +34,12 @@ const bookableItems = [
         imageUrl: '/img/rocking.jpg',
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
+    {
+        name: 'Scooter',
+        description: 'Scooter perfect for kids',
+        imageUrl: '/img/rocking.jpg',
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
+    },
 ];
 
 const users = [
