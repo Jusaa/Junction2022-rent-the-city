@@ -86,7 +86,6 @@ Address.belongsTo(User);
 
 class WoltShipment extends Model {};
 WoltShipment.init({
-    apiShipmentPromiseId: DataTypes.STRING,
     trackingUrl: DataTypes.STRING,
 },
 {
@@ -116,7 +115,11 @@ RentalEvent.init({
 });
 
 Address.hasMany(Transport, { foreignKey: 'fromAddressId' });
+Transport.belongsTo(Address, { foreignKey: 'fromAddressId' });
+
 Address.hasMany(Transport, { foreignKey: 'toAddressId' });
+Transport.belongsTo(Address, { foreignKey: 'toAddressId' });
+
 
 BookableItem.hasMany(RentalEvent);
 RentalEvent.belongsTo(BookableItem);
@@ -158,6 +161,7 @@ const initializeDb = async () => {
 };
 
 module.exports = {
+    sequelize,
     Category,
     BookableItemCategory,
     BookableItem,
