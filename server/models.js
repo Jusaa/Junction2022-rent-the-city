@@ -122,7 +122,10 @@ BookableItem.hasMany(RentalEvent);
 RentalEvent.hasOne(BookableItem);
 
 Lender.hasMany(RentalEvent);
+RentalEvent.hasOne(Lender);
+
 Borrower.hasMany(RentalEvent);
+RentalEvent.hasOne(Borrower);
 
 Transport.hasOne(RentalEvent, { foreignKey: 'deliveryTransportId' });
 Transport.hasOne(RentalEvent, { foreignKey: 'returnTransportId' });
