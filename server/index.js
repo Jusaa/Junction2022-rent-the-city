@@ -8,9 +8,10 @@ const port = 8080
 const { 
   Category,
   BookableItem,
+  BookableItemCategory,
   initializeDb, 
 } = require('./models');
-const { categories } = require('./data/initialData');
+const { bookableItems } = require('./data/initialData');
 
 app.use(cors());
 app.use(express.json());
@@ -34,6 +35,14 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
+app.get('/api/bookable-items', async (req, res) => {
+  try {
+    res.send(await BookableItem.findAll());
+  } catch (error) {
+    res.send(error)
+  }
+});
+
 app.get('/api/reset', async (req, res) => {
   try {
     await initializeDb();
@@ -43,8 +52,15 @@ app.get('/api/reset', async (req, res) => {
   }
 });
 
-app.get('/api/categories/:id/bookableitems', (req, res) => {
+app.get('/api/categories/:id/bookableitems', async (req, res) => {
     const { id } = req.params;
+    try {
+    const cat = await Category.findByPk(id);
+    const items = await cat.getBookableItems();
+    res.send(items);
+    } catch (e) {
+      res.status(500).send({ error: e });
+    }
 
 });
 
@@ -64,7 +80,7 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
               description,
               imageUrl
           });
-          savedItem.addCategory(category);
+          await savedItem.addCategory(category);
           res.status(201).send(savedItem);
         } catch (e) {
             res.status(500).send({error: e});
