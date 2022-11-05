@@ -1,11 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path');
+const util = require('util')
 
 const app = express()
 const port = 8080
 
 const { 
+  sequelize,
   Category,
   BookableItem,
   BookableItemCategory,
@@ -16,9 +18,10 @@ const {
   Address,
   Transport,
   RentalEvent,
+  WoltShipment,
 } = require('./models');
 const { bookableItems } = require('./data/initialData');
-const { bookItem } = require('./apiconnector');
+const { bookItemShipment } = require('./apiconnector');
 const { format } = require('path');
 
 app.use(cors());
@@ -105,7 +108,9 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
 });
 
 app.post('/api/book-item', async (req, res) => {
-  const { lenderId, borrowerId, itemId } = req.body;
+  console.log('1********');
+
+  const { lenderId, borrowerId, itemId, parcelIdentifier } = req.body;
   try {
     const [lender, borrower, item] = await Promise.all([
       Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
@@ -116,22 +121,34 @@ app.post('/api/book-item', async (req, res) => {
     const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
-    const a = await bookItem(item.name, formattedLenderAddress, formattedBorrowerAddress);
+    const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress);
+    const returnResponse = deliveryResponse; // TODO call scheduled shipment for this 
+    if (deliveryResponse.status === 201) {
+      
+      const deliveryShipment = await WoltShipment.create({ trackingUrl: deliveryResponse.data.tracking.url });
+      const deliveryTransport = await Transport.create({
+        parcelDescription: item.name,
+        parcelIdentifier: parcelIdentifier || item.name,
+      });
+      await deliveryTransport.setWoltShipment(deliveryShipment);
+      await sequelize.query(`update transports set fromAddressId = ${lender.user.address.id} where id = ${deliveryTransport.id}`);
+      await sequelize.query(`update transports set toAddressId = ${borrower.user.address.id} where id = ${deliveryTransport.id}`);
+    
+      const returnShipment = await WoltShipment.create({ trackingUrl: returnResponse.data.tracking.url });
+      const returnTransport = await Transport.create({
+        parcelDescription: item.name,
+        parcelIdentifier: parcelIdentifier || item.name,
+      });
+      await returnTransport.setWoltShipment(returnShipment);
+      await sequelize.query(`update transports set fromAddressId = ${borrower.user.address.id}, toAddressId = ${lender.user.address.id} where id = ${returnTransport.id}`);
 
-    const transport = await Transport.create({
-      parcelDescription: item.name,
-      parcelIdentifier: 'Pertti P.n vasara',
-    })
+      const rentalEvent = await RentalEvent.create({});
+      await rentalEvent.setBookableItem(item);
+      await rentalEvent.setLender(lender);
+      await rentalEvent.setBorrower(borrower);
+      await sequelize.query(`update rentalEvents set deliveryTransportId = ${deliveryTransport.id}, returnTransportId = ${returnTransport.id} where id = ${rentalEvent.id}`);  
 
-    const rentaleEvent = await RentalEvent.create();
-    const setted = await rentaleEvent.setBookableItem(item);
-
-    // const setted2 = await rentaleEvent.setLender(lender);
-    // const setted3 = await rentaleEvent.setBorrower(borrower);
-    console.log(setted)
-
-    if (a.status === 201) {
-      return res.status(201).send(a.data);
+      return res.status(201).send(deliveryResponse.data);
     } else {
       res.status(400).send({ error: 'kaikki meni pieleen' });
     }
