@@ -14,30 +14,35 @@ const bookableItems = [
         name: 'Makita drill',
         description: 'Very good drill for making holes.',
         imageUrl: '/img/makitaDrill.jpg',
+        pricePerDay: 5,
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
     {
         name: 'Makita saw',
         description: 'Very good saw for cutting stuff in pieces.',
         imageUrl: '/img/makitaSaw.png',
+        pricePerDay: 6,
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
     {
         name: 'Slip and slide',
         description: 'For your slipping and sliding needs',
         imageUrl: '/img/slip.jpeg',
+        pricePerDay: 10,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
     {
         name: 'Rocking horse',
         description: 'Horse your way to happiness',
         imageUrl: '/img/rocking.jpg',
+        pricePerDay: 3,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
     {
         name: 'Scooter',
         description: 'Scooter perfect for kids',
         imageUrl: '/img/rocking.jpg',
+        pricePerDay: 4,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
 ];

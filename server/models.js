@@ -22,6 +22,7 @@ BookableItem.init({
         name: DataTypes.STRING,
         description: DataTypes.STRING,
         imageUrl: DataTypes.STRING,
+        pricePerDay: DataTypes.NUMBER,
     },
     {
         sequelize, 
