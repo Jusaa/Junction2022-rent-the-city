@@ -26,7 +26,13 @@ const bookableItems = [
         name: 'Slip and slide',
         description: 'For your slipping and sliding needs',
         imageUrl: '/img/slip.jpeg',
-        categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
+    },
+    {
+        name: 'Rocking horse',
+        description: 'Horse your way to happiness',
+        imageUrl: '/img/rocking.jpg',
+        categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
 ];
 
