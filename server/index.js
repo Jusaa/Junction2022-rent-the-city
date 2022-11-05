@@ -14,6 +14,8 @@ const {
   Lender,
   Borrower, 
   Address,
+  Transport,
+  RentalEvent,
 } = require('./models');
 const { bookableItems } = require('./data/initialData');
 const { bookItem } = require('./apiconnector');
@@ -107,13 +109,24 @@ app.post('/api/book-item', async (req, res) => {
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
     const a = await bookItem(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    
+
+    const transport = await Transport.create({
+      parcelDescription: item.name,
+      parcelIdentifier: 'Pertti P.n vasara',
+    })
+
+    const rentaleEvent = await RentalEvent.create();
+    const setted = await rentaleEvent.setBookableItem(item);
+
+    // const setted2 = await rentaleEvent.setLender(lender);
+    // const setted3 = await rentaleEvent.setBorrower(borrower);
+    console.log(setted)
+
     if (a.status === 201) {
-      res.status(201).send(a.data);
-
+      return res.status(201).send(a.data);
+    } else {
+      res.status(400).send({ error: 'kaikki meni pieleen' });
     }
-    res.status(400).send({ error: 'kaikki meni pieleen' });
-
   } catch (e) {
     res.status(400).send(e);
   }
