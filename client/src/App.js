@@ -10,6 +10,7 @@ import Login from './views/auth/login'
 import Signup from './views/auth/signup'
 import BorrowerHome from './views/borrowerHome'
 import LenderHome from './views/lenderHome'
+import BorrowableItem from './views/borrowableItem';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class App extends React.Component {
           <Route path="/login" element={<Login setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
           <Route path="/signup" element={<Signup setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
           <Route path="/borrower/home" element={<BorrowerHome getUser={this.getUser}/>}></Route>
+          <Route path="/borrower/item/:id" element={<BorrowableItem getUser={this.getUser}/>}></Route>
           <Route path="/lender/home" element={<LenderHome getUser={this.getUser}/>}></Route>
           <Route path="/" element={<MainPage getUser={this.getUser}/>}></Route>
         </Routes>
