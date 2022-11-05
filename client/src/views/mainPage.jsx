@@ -2,28 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 class MainPage extends React.Component {
+    constructor(props) {
+        super(props);
+      }
     render() {
         return (
             <div className="App">
-                As a borrower
                 <div>
-                    <Link to="/borrower/login">
+                    <Link to="/login">
                         <button>Log in</button>
                     </Link>
                 </div>
                 <div>
-                    <Link to="/borrower/signup">
-                        <button>Sign up</button>
-                    </Link>
-                </div>
-                As a lender
-                <div>
-                    <Link to="/lender/login">
-                        <button>Log in</button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to="/lender/signup">
+                    <Link to="/signup">
                         <button>Sign up</button>
                     </Link>
                 </div>
