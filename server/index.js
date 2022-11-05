@@ -9,10 +9,15 @@ const {
   Category,
   BookableItem,
   BookableItemCategory,
-  initializeDb, 
+  initializeDb,
+  User,
+  Lender,
+  Borrower, 
+  Address,
 } = require('./models');
 const { bookableItems } = require('./data/initialData');
 const { bookItem } = require('./apiconnector');
+const { format } = require('path');
 
 app.use(cors());
 app.use(express.json());
@@ -89,12 +94,37 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
     }
 });
 
-app.post('/api/book-item', async (req, res) => {
-  const { userId, itemId } = req.body;
-  // TODO: add also scheded return
+app.post('/api/pre-book-item', async (req, res) => {
+  const { lenderId, borrowerId, itemId, lenderAddress, borrowerAddress } = req.body;
   try {
-    const a = await bookItem();
-    console.log(a);
+    const [user, item] = await Promise.all([
+      Lender.findByPk(lenderId),
+      BookableItem.findByPk(itemId)
+    ]);
+
+    const a = await bookItem(item.name, lenderAddress, borrowerAddress);
+    console.log(a.data);
+    res.send('hieno juttu');
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+app.post('/api/book-item', async (req, res) => {
+  const { lenderId, borrowerId, itemId, lenderAddress, borrowerAddress } = req.body;
+  try {
+    const [lender, borrower, item] = await Promise.all([
+      Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
+      Borrower.findByPk(borrowerId, { include: [ { model: User, include: [Address] }]}),
+      BookableItem.findByPk(itemId)
+    ]);
+    // const lenderAddressObject = await lender.user.getAddress();
+    console.log(borrower)
+    const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
+    const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
+    console.log(formattedBorrowerAddress);
+    const a = await bookItem(item.name, formattedLenderAddress, formattedBorrowerAddress);
+    console.log(a.data);
     res.send('hieno juttu');
   } catch (e) {
     res.status(400).send(e);
