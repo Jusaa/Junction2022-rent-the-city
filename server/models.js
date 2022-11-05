@@ -52,5 +52,7 @@ const initializeDb = async () => {
 
 module.exports = {
     Category,
+    BookableItemCategory,
+    BookableItem,
     initializeDb,
 };
