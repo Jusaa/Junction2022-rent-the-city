@@ -161,5 +161,7 @@ module.exports = {
     Lender,
     Borrower,
     Address,
+    Transport,
+    WoltShipment,
     initializeDb,
 };
