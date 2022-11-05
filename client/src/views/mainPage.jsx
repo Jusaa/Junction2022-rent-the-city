@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const MainPage = () => {
-    return (
-        <div className="App">
-            <div className="App-header">
+class MainPage extends React.Component {
+    render() {
+        return (
+            <div className="App">
                 As a borrower
                 <div>
                     <Link to="/borrower/login">
@@ -28,8 +28,8 @@ const MainPage = () => {
                     </Link>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default MainPage
