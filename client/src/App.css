@@ -43,11 +43,29 @@ button, input[type=submit] {
 
 .Search {
   top: 38px;
+  width: 100%;
   position: absolute;
+  border-bottom: 1px solid lightgrey;
+}
+
+.SearchBottom {
+  height: 1em;
 }
 
 .ItemList {
   overflow: scroll;
-  top: 130px;
+  top: 140px;
   position: absolute;
+}
+
+.ItemListItem {
+  display: flex;
+  overflow-y: hidden;
+  border-bottom: 1px solid lightgrey;
+}
+
+.ItemListItemPart {
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: middle;
 }
