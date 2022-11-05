@@ -56,6 +56,7 @@ app.get('/api/bookable-items', async (req, res) => {
 
 app.get('/api/bookable-items/:id', async (req, res) => {
   try {
+    const { id } = req.params;
     res.send(await BookableItem.findByPk(id));
   } catch (error) {
     res.send(error)
