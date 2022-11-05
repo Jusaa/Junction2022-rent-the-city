@@ -160,5 +160,6 @@ module.exports = {
     User,
     Lender,
     Borrower,
+    Address,
     initializeDb,
 };
