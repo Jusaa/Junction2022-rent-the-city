@@ -119,13 +119,13 @@ Address.hasMany(Transport, { foreignKey: 'fromAddressId' });
 Address.hasMany(Transport, { foreignKey: 'toAddressId' });
 
 BookableItem.hasMany(RentalEvent);
-RentalEvent.hasOne(BookableItem);
+RentalEvent.belongsTo(BookableItem);
 
 Lender.hasMany(RentalEvent);
-RentalEvent.hasOne(Lender);
+RentalEvent.belongsTo(Lender);
 
 Borrower.hasMany(RentalEvent);
-RentalEvent.hasOne(Borrower);
+RentalEvent.belongsTo(Borrower);
 
 Transport.hasOne(RentalEvent, { foreignKey: 'deliveryTransportId' });
 Transport.hasOne(RentalEvent, { foreignKey: 'returnTransportId' });
