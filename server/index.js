@@ -7,8 +7,10 @@ const port = 8080
 
 const { 
   Category,
+  BookableItem,
   initializeDb, 
 } = require('./models');
+const { categories } = require('./data/initialData');
 
 app.use(cors());
 app.use(express.json());
@@ -46,13 +48,28 @@ app.get('/api/categories/:id/bookableitems', (req, res) => {
 
 });
 
-app.post('/api/categories/:id/bookableitems', (req, res) => {
+app.post('/api/categories/:id/bookableitems', async (req, res) => {
     const { name, description, imageUrl } = req.body;
-    if (!name || !description || !imageUrl || !categoryId ) {
-        res.status(400).send({ error: 'missing params'});
+    const { id } = req.params;
+    if (!name || !description || !imageUrl || !id ) {
+        return res.status(400).send({ error: 'missing params'});
+    } else {
+        try {
+          const category = await Category.findByPk(id);
+          if (!category) {
+            res.status(500).send({error: 'category not found'});
+          }
+          const savedItem = await BookableItem.create({
+              name,
+              description,
+              imageUrl
+          });
+          savedItem.addCategory(category);
+          res.status(201).send(savedItem);
+        } catch (e) {
+            res.status(500).send({error: e});
+        }
     }
-
-    res.send('Pigngg!')
 });
 
 app.listen(port, () => {

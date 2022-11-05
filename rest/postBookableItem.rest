@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/categories/1/bookableitems
+Content-Type: Application/Json
+
+{
+    "name": "Toy",
+    "description": "a nice toy",
+    "imageUrl": "toy.png"
+}
