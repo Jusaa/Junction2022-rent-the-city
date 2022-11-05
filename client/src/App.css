@@ -13,7 +13,23 @@
 .Nav {
   left: 0;
   top: 0;
-  position: fixed;
+  width: 100%;
+  background-color: cyan;
+  color: black;
+}
+
+.SideNav {
+  right: 0;
+  height: 100%;
+  width: 100px;
+  background-color: cyan;
+  color: black;
+  position: absolute;
+}
+
+.NavItem {
+  position: relative;
+  display: inline;
 }
 
 button, input[type=submit] {

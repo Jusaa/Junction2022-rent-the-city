@@ -1,13 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../header'
+import Menu from '../menu'
 
-class BorrowerSignup extends React.Component {
+class Signup extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = { role: 'borrower' };
+  }
+
+  setBorrower = () => {
+    this.setState(() => ({
+        role: 'borrower'
+    }));
+  };
+  setLender = () => {
+    this.setState(() => ({
+        role: 'lender'
+    }));
+  };
+
   render () {
     return (
-    <div className="App">
-      <Header back={true} />
-        <form>
+    <div>
+      <Menu back={true} />
+        <form className="App">
           <table>
             <tr><td>
               <label for="name">Name:</label>
@@ -20,6 +37,14 @@ class BorrowerSignup extends React.Component {
             <tr><td>
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" />
+            <div>
+              <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
+              <label for="lender">Borrower</label>
+            </div>
+            <div>
+              <input type="radio" id="lender" name="role" onChange={this.setLender}/>
+              <label for="lender">Lender</label>
+            </div>
             </td></tr>
             <tr><td>
             <Link to="/borrower/home">
@@ -33,4 +58,4 @@ class BorrowerSignup extends React.Component {
   }
 }
 
-export default BorrowerSignup
+export default Signup
