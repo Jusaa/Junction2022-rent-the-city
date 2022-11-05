@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../header'
 
 class BorrowerSignup extends React.Component {
   render () {
     return (
-    <div>
-      <Link to="/">
-        <button>Back</button>
-      </Link>
+    <div className="App">
+      <Header back={true} />
         <form>
           <table>
             <tr><td>
@@ -23,7 +22,7 @@ class BorrowerSignup extends React.Component {
             <input type="text" id="address" name="address" />
             </td></tr>
             <tr><td>
-            <Link to="borrower/home">
+            <Link to="/borrower/home">
               <input type="submit" value="Sign up!"></input>
             </Link>
             </td></tr>
