@@ -14,6 +14,9 @@ class Signup extends React.Component {
   setLender = () => {
     this.props.state.role = 'lender'
   };
+  setUser = (e) => {
+    this.props.state.user = e.target.value
+  };
 
   render () {
     return (
@@ -22,23 +25,23 @@ class Signup extends React.Component {
         <form className="App">
           <table>
             <tr><td>
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" />
+              <label htmlFor="name">Name:</label>
+              <input type="text" id="name" name="name" onChange={this.setUser}/>
             </td></tr>
             <tr><td>
-              <label for="bank">Bank IBAN:</label>
+              <label htmlFor="bank">Bank IBAN:</label>
               <input type="text" id="bank" name="bank" />
             </td></tr>
             <tr><td>
-            <label for="address">Address:</label>
+            <label htmlFor="address">Address:</label>
             <input type="text" id="address" name="address" />
             <div>
               <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
-              <label for="lender">Borrower</label>
+              <label htmlFor="lender">Borrower</label>
             </div>
             <div>
               <input type="radio" id="lender" name="role" onChange={this.setLender}/>
-              <label for="lender">Lender</label>
+              <label htmlFor="lender">Lender</label>
             </div>
             </td></tr>
             <tr><td>
