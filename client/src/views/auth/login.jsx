@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../header'
+import Menu from '../menu'
 
-class LenderLogin extends React.Component {
+class Login extends React.Component {
   render () {
     return (
-    <div className="App">
-      <Header back={true} />
-        <form>
+    <div>
+      <Menu back={true} />
+        <form className="App">
           <table>
             <tr><td>
               <label for="name">Name:</label>
@@ -18,7 +18,7 @@ class LenderLogin extends React.Component {
               <input type="password" id="password" name="password" />
             </td></tr>
             <tr><td>
-            <Link to="/lender/home">
+            <Link to="/borrower/home">
               <input type="submit" value="Log in!"></input>
             </Link>
             </td></tr>
@@ -29,4 +29,4 @@ class LenderLogin extends React.Component {
   }
 }
 
-export default LenderLogin
+export default Login
