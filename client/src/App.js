@@ -1,32 +1,34 @@
 import './App.css'
+import React from 'react'
 import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link
   } from "react-router-dom";
 import MainPage from './views/mainPage.jsx'
-import BorrowerLogin from './views/auth/borrowerLogin'
-import BorrowerSignup from './views/auth/borrowerSignup'
+import Login from './views/auth/login'
+import Signup from './views/auth/signup'
 import BorrowerHome from './views/borrowerHome'
-import LenderLogin from './views/auth/lenderLogin'
-import LenderSignup from './views/auth/lenderSignup'
 import LenderHome from './views/lenderHome'
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/borrower/login" element={<BorrowerLogin />}></Route>
-        <Route path="/borrower/signup" element={<BorrowerSignup />}></Route>
-        <Route path="/borrower/home" element={<BorrowerHome />}></Route>
-        <Route path="/lender/login" element={<LenderLogin />}></Route>
-        <Route path="/lender/signup" element={<LenderSignup />}></Route>
-        <Route path="/lender/home" element={<LenderHome user="test"/>}></Route>
-        <Route path="/" element={<MainPage />}></Route>
-      </Routes>
-    </Router>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: 'Guest', role: 'borrower' };
+  }
+  render() {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login state={this.state}/>}></Route>
+          <Route path="/signup" element={<Signup state={this.state}/>}></Route>
+          <Route path="/borrower/home" element={<BorrowerHome state={this.state}/>}></Route>
+          <Route path="/lender/home" element={<LenderHome state={this.state}/>}></Route>
+          <Route path="/" element={<MainPage state={this.state}/>}></Route>
+        </Routes>
+      </Router>
+    );
+  }
 }
 
 export default App;
