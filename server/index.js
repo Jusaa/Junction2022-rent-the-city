@@ -7,8 +7,11 @@ const port = 8080
 
 const { 
   Category,
+  BookableItem,
+  BookableItemCategory,
   initializeDb, 
 } = require('./models');
+const { bookableItems } = require('./data/initialData');
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +30,14 @@ app.get('/api/ping', (req, res) => {
 app.get('/api/categories', async (req, res) => {
   try {
     res.send(await Category.findAll());
+  } catch (error) {
+    res.send(error)
+  }
+});
+
+app.get('/api/bookable-items', async (req, res) => {
+  try {
+    res.send(await BookableItem.findAll());
   } catch (error) {
     res.send(error)
   }
