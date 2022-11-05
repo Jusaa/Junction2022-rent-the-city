@@ -84,6 +84,48 @@ Address.init({
 User.hasOne(Address);
 Address.belongsTo(User);
 
+class WoltShipment extends Model {};
+WoltShipment.init({
+    apiShipmentPromiseId: DataTypes.STRING,
+    trackingUrl: DataTypes.STRING,
+},
+{
+    sequelize, 
+    modelName: 'woltShipment',
+});
+
+class Transport extends Model {};
+Transport.init({
+    parcelDescription: DataTypes.STRING,
+    parcelIdentifier: DataTypes.STRING,
+},
+{
+    sequelize, 
+    modelName: 'transport',
+});
+Transport.hasOne(WoltShipment);
+WoltShipment.belongsTo(Transport);
+
+
+class RentalEvent extends Model {};
+RentalEvent.init({
+},
+{
+    sequelize, 
+    modelName: 'rentalEvent',
+});
+
+Address.hasMany(Transport, { foreignKey: 'fromAddressId' });
+Address.hasMany(Transport, { foreignKey: 'toAddressId' });
+
+BookableItem.hasMany(RentalEvent);
+
+Lender.hasMany(RentalEvent);
+Borrower.hasMany(RentalEvent);
+
+Transport.hasOne(RentalEvent, { foreignKey: 'deliveryTransportId' });
+Transport.hasOne(RentalEvent, { foreignKey: 'returnTransportId' });
+
 const initializeDb = async () => {
     await sequelize.sync({ force: true });
     const categoryCreates = initialData.categories.map(x => Category.create(x));
@@ -118,5 +160,6 @@ module.exports = {
     User,
     Lender,
     Borrower,
+    Address,
     initializeDb,
 };
