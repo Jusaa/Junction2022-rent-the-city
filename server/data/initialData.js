@@ -22,6 +22,12 @@ const bookableItems = [
         imageUrl: '/img/makitaSaw.png',
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
+    {
+        name: 'Slip and slide',
+        description: 'For your slipping and sliding needs',
+        imageUrl: '/img/slip.jpeg',
+        categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
+    },
 ];
 
 const users = [
