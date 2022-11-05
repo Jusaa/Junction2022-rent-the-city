@@ -22,7 +22,7 @@ function App() {
         <Route path="/borrower/home" element={<BorrowerHome />}></Route>
         <Route path="/lender/login" element={<LenderLogin />}></Route>
         <Route path="/lender/signup" element={<LenderSignup />}></Route>
-        <Route path="/lender/home" element={<LenderHome />}></Route>
+        <Route path="/lender/home" element={<LenderHome user="test"/>}></Route>
         <Route path="/" element={<MainPage />}></Route>
       </Routes>
     </Router>
