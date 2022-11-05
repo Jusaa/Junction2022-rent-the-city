@@ -37,6 +37,17 @@ BookableItemCategory.init({},
 BookableItem.belongsToMany(Category, { through: BookableItemCategory });
 Category.belongsToMany(BookableItem, { through: BookableItemCategory });
 
+class User extends Model {};
+User.init({
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
+},
+{
+    sequelize, 
+    modelName: 'user',
+});
+
 const initializeDb = async () => {
     console.log(categories);
     await sequelize.sync({ force: true });
