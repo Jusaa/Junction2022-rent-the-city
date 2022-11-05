@@ -2,10 +2,13 @@ import React from 'react'
 import Menu from './menu'
 
 class BorrowerHome extends React.Component {
+    constructor(props) {
+        super(props);
+      }
     render() {
         return (
             <div className="App">
-                <Menu logout={true} className='Nav'></Menu>
+                <Menu logout={true} user={this.props.state.user} className='Nav'></Menu>
                 <div className="App">
                     <p>Items available to rent</p>
                     <ul >

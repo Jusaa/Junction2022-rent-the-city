@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import Menu from '../menu'
 
 class Login extends React.Component {
+  
+  constructor(props) {
+    super(props);
+  }
+
   render () {
     return (
     <div>
@@ -18,9 +23,26 @@ class Login extends React.Component {
               <input type="password" id="password" name="password" />
             </td></tr>
             <tr><td>
-            <Link to="/borrower/home">
-              <input type="submit" value="Log in!"></input>
-            </Link>
+            <div>
+              <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
+              <label for="lender">Borrower</label>
+            </div>
+            <div>
+              <input type="radio" id="lender" name="role" onChange={this.setLender}/>
+              <label for="lender">Lender</label>
+            </div>
+            </td></tr>
+            <tr><td>
+            {this.props.state.role == 'borrower' &&
+              <Link to="/borrower/home">
+                <input type="submit" value="Log in!"></input>
+              </Link>
+            }
+            {this.props.state.role == 'lender' &&
+              <Link to="/lender/home">
+                <input type="submit" value="Log in!"></input>
+              </Link>
+            }
             </td></tr>
           </table>
         </form>
