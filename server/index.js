@@ -21,7 +21,7 @@ const {
   WoltShipment,
 } = require('./models');
 const { bookableItems } = require('./data/initialData');
-const { bookItemShipment } = require('./apiconnector');
+const { bookItemShipment, bookItemReturn } = require('./apiconnector');
 const { format } = require('path');
 
 app.use(cors());
@@ -123,9 +123,9 @@ app.post('/api/book-item', async (req, res) => {
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
     const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    const returnResponse = deliveryResponse; // TODO call scheduled shipment for this 
+    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress);
+
     if (deliveryResponse.status === 201) {
-      
       const deliveryShipment = await WoltShipment.create({ trackingUrl: deliveryResponse.data.tracking.url });
       const deliveryTransport = await Transport.create({
         parcelDescription: item.name,
