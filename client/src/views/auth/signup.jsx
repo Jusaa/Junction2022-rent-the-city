@@ -8,15 +8,18 @@ class Signup extends React.Component {
     super(props);
   }
 
-  setBorrower = () => {
-    this.props.state.role = 'borrower'
-  };
   setLender = () => {
-    this.props.state.role = 'lender'
+    this.props.setRole('lender')
   };
-  setUser = (e) => {
-    this.props.state.user = e.target.value
+  setBorrower = () => {
+    this.props.setRole('borrower')
   };
+  setUsername = (e) => {
+    this.props.setUsername(e.target.value) 
+  };
+  getUser = () => {
+    return this.props.getUser();
+  }
 
   render () {
     return (
@@ -26,7 +29,7 @@ class Signup extends React.Component {
           <table>
             <tr><td>
               <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" onChange={this.setUser}/>
+              <input type="text" id="name" name="name" onChange={this.setUsername}/>
             </td></tr>
             <tr><td>
               <label htmlFor="bank">Bank IBAN:</label>
@@ -45,12 +48,12 @@ class Signup extends React.Component {
             </div>
             </td></tr>
             <tr><td>
-            {this.props.state.role == 'borrower' &&
+            {this.getUser().role == 'borrower' &&
               <Link to="/borrower/home">
                 <input type="submit" value="Sign up"></input>
               </Link>
             }
-            {this.props.state.role == 'lender' &&
+            {this.getUser().role == 'lender' &&
               <Link to="/lender/home">
                 <input type="submit" value="Sign up!"></input>
               </Link>

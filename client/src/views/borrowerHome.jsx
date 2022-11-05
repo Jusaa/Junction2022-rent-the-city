@@ -5,13 +5,16 @@ class BorrowerHome extends React.Component {
     constructor(props) {
         super(props);
       }
+    getUser = () => {
+        return this.props.getUser();
+    }
     render() {
         return (
             <div className="App">
-                <Menu logout={true} user={this.props.state.user} className='Nav'></Menu>
+                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <p>Items available to rent</p>
-                    <ul >
+                    <ul>
                         <li>Item 1 - 5€ delivery in 30min - 10€/day</li>
                         <li>Item 2 - 7€ delivery in 40min - 25€/day</li>
                         <li>Item 3 - 10€ delivery in 50min - 5€/day</li>
