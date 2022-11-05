@@ -52,8 +52,15 @@ app.get('/api/reset', async (req, res) => {
   }
 });
 
-app.get('/api/categories/:id/bookableitems', (req, res) => {
+app.get('/api/categories/:id/bookableitems', async (req, res) => {
     const { id } = req.params;
+    try {
+    const cat = await Category.findByPk(id);
+    const items = await cat.getBookableItems();
+    res.send(items);
+    } catch (e) {
+      res.status(500).send({ error: e });
+    }
 
 });
 
