@@ -1,0 +1,26 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install and build server
+        working-directory: ./server
+        run: |
+          npm ci
+      - name: Install and build client
+        working-directory: ./client
+        run: |
+          npm ci
+          npm run build
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: cp -R ./client/build ./server/public
+      - name: Deploy to fly.io
+        working-directory: ./server
+        run: flyctl deploy --remote-only
