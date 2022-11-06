@@ -156,7 +156,7 @@ app.post('/api/book-item', async (req, res) => {
       await rentalEvent.setBorrower(borrower);
       await sequelize.query(`update rentalEvents set deliveryTransportId = ${deliveryTransport.id}, returnTransportId = ${returnTransport.id} where id = ${rentalEvent.id}`);  
 
-      return res.status(201).send(deliveryResponse.data);
+      return res.status(201).send(deliveryResponse.data.tracking);
     } else {
       res.status(400).send({ error: 'kaikki meni pieleen' });
     }
