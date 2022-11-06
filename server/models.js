@@ -21,7 +21,6 @@ class BookableItem extends Model {};
 BookableItem.init({
         name: DataTypes.STRING,
         description: DataTypes.STRING,
-        isAvailable: DataTypes.BOOLEAN,
         imageUrl: DataTypes.STRING,
         pricePerDay: DataTypes.NUMBER,
     },
@@ -110,6 +109,8 @@ WoltShipment.belongsTo(Transport);
 
 class RentalEvent extends Model {};
 RentalEvent.init({
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
 },
 {
     sequelize, 

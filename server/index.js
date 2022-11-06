@@ -110,9 +110,7 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
 });
 
 app.post('/api/book-item', async (req, res) => {
-  console.log('1********');
-
-  const { lenderId, borrowerId, itemId, parcelIdentifier } = req.body;
+  const { lenderId, borrowerId, itemId, parcelIdentifier, returnDate } = req.body;
   try {
     const [lender, borrower, item] = await Promise.all([
       Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
@@ -120,13 +118,18 @@ app.post('/api/book-item', async (req, res) => {
       BookableItem.findByPk(itemId)
     ]);
 
+    let returnDate2 = returnDate;
+    if (!returnDate2) {
+      returnDate2 = new Date();
+      returnDate2.setDate(returnDate2.getDate() + 7);
+    }
     const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
     const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress);
+    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress, returnDate2);
 
-    if (deliveryResponse.status === 201) {
+    if (deliveryResponse.status === 201 && returnResponse.status === 201) {
       const deliveryShipment = await WoltShipment.create({ trackingUrl: deliveryResponse.data.tracking.url });
       const deliveryTransport = await Transport.create({
         parcelDescription: item.name,
@@ -144,7 +147,10 @@ app.post('/api/book-item', async (req, res) => {
       await returnTransport.setWoltShipment(returnShipment);
       await sequelize.query(`update transports set fromAddressId = ${borrower.user.address.id}, toAddressId = ${lender.user.address.id} where id = ${returnTransport.id}`);
 
-      const rentalEvent = await RentalEvent.create({});
+      const rentalEvent = await RentalEvent.create({
+        startDate: new Date(),
+        endDate: returnDate2,
+      });
       await rentalEvent.setBookableItem(item);
       await rentalEvent.setLender(lender);
       await rentalEvent.setBorrower(borrower);
