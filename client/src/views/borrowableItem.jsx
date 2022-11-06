@@ -1,5 +1,4 @@
 import React from 'react'
-import Menu from './menu'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -20,7 +19,6 @@ class BorrowableItem extends React.Component {
         console.log(this.state.item)
         return (
             <div className="App">
-                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     
                     <div className="item-main-image">

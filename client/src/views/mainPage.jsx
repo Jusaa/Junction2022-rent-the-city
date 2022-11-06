@@ -8,6 +8,8 @@ class MainPage extends React.Component {
     render() {
         return (
             <div className="App">
+                <img className='logo' src='../img/Rently blue logo.png' />
+                <p className='header'>Rent The City..</p>
                 <div>
                     <Link to="/login">
                         <button>Log in</button>

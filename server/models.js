@@ -22,6 +22,7 @@ BookableItem.init({
         name: DataTypes.STRING,
         description: DataTypes.STRING,
         imageUrl: DataTypes.STRING,
+        pricePerDay: DataTypes.NUMBER,
     },
     {
         sequelize, 
@@ -108,6 +109,8 @@ WoltShipment.belongsTo(Transport);
 
 class RentalEvent extends Model {};
 RentalEvent.init({
+    startDateTime: DataTypes.DATE,
+    endDateTime: DataTypes.DATE,
 },
 {
     sequelize, 
@@ -127,6 +130,9 @@ RentalEvent.belongsTo(BookableItem);
 Lender.hasMany(RentalEvent);
 RentalEvent.belongsTo(Lender);
 
+Lender.hasMany(BookableItem);
+BookableItem.belongsTo(Lender);
+
 Borrower.hasMany(RentalEvent);
 RentalEvent.belongsTo(Borrower);
 
@@ -137,12 +143,6 @@ const initializeDb = async () => {
     await sequelize.sync({ force: true });
     const categoryCreates = initialData.categories.map(x => Category.create(x));
     await Promise.all(categoryCreates);
-
-    const bookableItemCreates = initialData.bookableItems.map(x => BookableItem.create(
-        x, 
-        { include: [ Category ] })
-    );
-    await Promise.all(bookableItemCreates);
 
     const lenderUser = await User.create(initialData.users[0])
     const lender = await Lender.create(initialData.lenders[0]);
@@ -155,6 +155,13 @@ const initializeDb = async () => {
     await borrower.setUser(borrowerUser);
     const borrowerAddress = await Address.create(initialData.addresses[1]);
     await borrowerAddress.setUser(borrowerUser);
+
+    const bookableItemCreates = initialData.bookableItems.map(x => BookableItem.create(
+        x, 
+        { include: [ Category ] })
+    );
+    const items = await Promise.all(bookableItemCreates);
+    await Promise.all(items.map(x => x.setLender(lender)));
 
     // const borrowerUser = await User.create(initialData.users[1])
     // await borrowerUser.addBorrower(await Lender.create(initialData.borrowers[0]))
