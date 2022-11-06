@@ -60,6 +60,9 @@ class BorrowableItem extends React.Component {
                             </div>
                         }
                     </div>
+                    <Link to={`/order/${window.location.pathname.split("/")[3]}`}>
+                        <button className="button-xl">Rent!</button>
+                    </Link>
                 </div>
             </div>
         )

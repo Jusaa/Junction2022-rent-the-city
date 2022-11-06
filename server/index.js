@@ -48,7 +48,7 @@ app.get('/api/categories', async (req, res) => {
 
 app.get('/api/bookable-items', async (req, res) => {
   try {
-    const bo = await BookableItem.findAll({ include: [ { model: RentalEvent, include: { model: Lender, include: { model: User, include: [Address]}} }]});
+    const bo = await BookableItem.findAll({ include: [ { model: Lender, include: { model: User, include: [Address]} }]});
     res.send(bo);
   } catch (error) {
     res.send(error)
@@ -58,7 +58,7 @@ app.get('/api/bookable-items', async (req, res) => {
 app.get('/api/bookable-items/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    res.send(await BookableItem.findByPk(id));
+    res.send(await BookableItem.findByPk(id, { include: [ { model: Lender, include: { model: User, include: [Address]} }]}));
   } catch (error) {
     res.send(error)
   }
@@ -110,9 +110,7 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
 });
 
 app.post('/api/book-item', async (req, res) => {
-  console.log('1********');
-
-  const { lenderId, borrowerId, itemId, parcelIdentifier } = req.body;
+  const { lenderId, borrowerId, itemId, parcelIdentifier, returnDate, lenderComment, borrowerComment } = req.body;
   try {
     const [lender, borrower, item] = await Promise.all([
       Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
@@ -120,13 +118,18 @@ app.post('/api/book-item', async (req, res) => {
       BookableItem.findByPk(itemId)
     ]);
 
+    let returnDate2 = returnDate;
+    if (!returnDate2) {
+      returnDate2 = new Date();
+      returnDate2.setDate(returnDate2.getDate() + 7);
+    }
     const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
-    const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress);
+    const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress, lender.user.name, borrower.user.name, lender.user.phoneNumber, borrower.user.phoneNumber, lenderComment, borrowerComment);
+    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress, lender.user.name, borrower.user.name, lender.user.phoneNumber, borrower.user.phoneNumber, lenderComment, borrowerComment, returnDate2);
 
-    if (deliveryResponse.status === 201) {
+    if (deliveryResponse.status === 201 && returnResponse.status === 201) {
       const deliveryShipment = await WoltShipment.create({ trackingUrl: deliveryResponse.data.tracking.url });
       const deliveryTransport = await Transport.create({
         parcelDescription: item.name,
@@ -144,13 +147,16 @@ app.post('/api/book-item', async (req, res) => {
       await returnTransport.setWoltShipment(returnShipment);
       await sequelize.query(`update transports set fromAddressId = ${borrower.user.address.id}, toAddressId = ${lender.user.address.id} where id = ${returnTransport.id}`);
 
-      const rentalEvent = await RentalEvent.create({});
+      const rentalEvent = await RentalEvent.create({
+        startDate: new Date(),
+        endDate: returnDate2,
+      });
       await rentalEvent.setBookableItem(item);
       await rentalEvent.setLender(lender);
       await rentalEvent.setBorrower(borrower);
       await sequelize.query(`update rentalEvents set deliveryTransportId = ${deliveryTransport.id}, returnTransportId = ${returnTransport.id} where id = ${rentalEvent.id}`);  
 
-      return res.status(201).send(deliveryResponse.data);
+      return res.status(201).send(deliveryResponse.data.tracking);
     } else {
       res.status(400).send({ error: 'kaikki meni pieleen' });
     }
