@@ -38,14 +38,15 @@ class UserInfo extends React.Component {
           <input className="form-box" type="text" id="name" name="name" placeholder="Name" onChange={this.setName}/>
           <input className="form-box" type="text" id="surname" name="surname" placeholder="Surname"/>
           <input className="form-box" type="text" id="address" name="address" placeholder="Street Address"/>
-          <input className="form-box" type="text" id="iban" name="iban" placeholder="IBAN"/>
-
-              {this.getUser().role == 'borrower' &&
-                <Link to="/borrower/home">
-                  <input className="action-btn button-xl" type="submit" value="Sign Up">
-                  </input>
-                </Link>
-              }
+          {this.getUser().role == 'lender' &&
+            <input className="form-box" type="text" id="iban" name="iban" placeholder="IBAN"/>
+          }
+          {this.getUser().role == 'borrower' &&
+            <Link to="/borrower/home">
+              <input className="action-btn button-xl" type="submit" value="Sign Up">
+              </input>
+            </Link>
+          }
         </form>
     </div>
     )
