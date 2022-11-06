@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Menu from '../menu'
 
 class Signup extends React.Component {
   
@@ -24,7 +23,6 @@ class Signup extends React.Component {
   render () {
     return (
     <div>
-      <Menu back={true} />
         <form className="App">
           <table>
             <tr><td>
