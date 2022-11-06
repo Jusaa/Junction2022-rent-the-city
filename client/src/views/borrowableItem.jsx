@@ -31,7 +31,7 @@ class BorrowableItem extends React.Component {
                                 <div className="item-info-block">
                                     <div className="description-block">
                                         <p className="header3 description">Description</p>
-                                        <p className="body-txt item-description">{this.state.item.description} sdfhskdfha dfvbkdjfkja dhfgajsdfj</p>
+                                        <p className="body-txt item-description">{this.state.item.description}</p>
                                     </div>
                                     <div className="description-block-row">
                                         <p className="header3 description">Rental Period</p>
