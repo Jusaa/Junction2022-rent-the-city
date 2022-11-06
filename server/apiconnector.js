@@ -63,9 +63,7 @@ const bookItemShipment = (itemName, lenderAddress, borrowerAddress) => {
 }
 
 
-const bookItemReturn = (itemName, lenderAddress, borrowerAddress) => {
-  const date = new Date();
-  date.setDate(date.getDate() + 7);
+const bookItemReturn = (itemName, lenderAddress, borrowerAddress, returnTime) => {
   return axios.post(`https://daas-public-api.development.dev.woltapi.com/merchants/${MERCHANT_ID}/delivery-order`,
       {
           "pickup": {
@@ -107,7 +105,7 @@ const bookItemReturn = (itemName, lenderAddress, borrowerAddress) => {
           ],
           "tips": [],
           "min_preparation_time_minutes": 10,
-          "scheduled_dropoff_time": date
+          "scheduled_dropoff_time": returnTime
         },
         {
           headers: {
