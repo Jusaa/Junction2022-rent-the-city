@@ -110,7 +110,7 @@ app.post('/api/categories/:id/bookableitems', async (req, res) => {
 });
 
 app.post('/api/book-item', async (req, res) => {
-  const { lenderId, borrowerId, itemId, parcelIdentifier, returnDate } = req.body;
+  const { lenderId, borrowerId, itemId, parcelIdentifier, returnDate, lenderComment, borrowerComment } = req.body;
   try {
     const [lender, borrower, item] = await Promise.all([
       Lender.findByPk(lenderId, { include: [ { model: User, include: [Address] }]}),
@@ -126,8 +126,8 @@ app.post('/api/book-item', async (req, res) => {
     const formattedLenderAddress = `${lender.user.address.street}, ${lender.user.address.postalCode} ${lender.user.address.city}`
     const formattedBorrowerAddress = `${borrower.user.address.street}, ${borrower.user.address.postalCode} ${borrower.user.address.city}`
 
-    const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress);
-    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress, returnDate2);
+    const deliveryResponse = await bookItemShipment(item.name, formattedLenderAddress, formattedBorrowerAddress, lender.user.name, borrower.user.name, lender.user.phoneNumber, borrower.user.phoneNumber, lenderComment, borrowerComment);
+    const returnResponse = await bookItemReturn(item.name, formattedLenderAddress, formattedBorrowerAddress, lender.user.name, borrower.user.name, lender.user.phoneNumber, borrower.user.phoneNumber, lenderComment, borrowerComment, returnDate2);
 
     if (deliveryResponse.status === 201 && returnResponse.status === 201) {
       const deliveryShipment = await WoltShipment.create({ trackingUrl: deliveryResponse.data.tracking.url });
