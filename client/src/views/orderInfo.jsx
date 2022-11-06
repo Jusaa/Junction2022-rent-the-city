@@ -22,8 +22,7 @@ class OrderInfo extends React.Component {
         return this.props.getUser();
     }
     render() {
-        if (this.state && this.state.item) {
-            console.log(this.state)
+        if (this.state && this.state.item && this.state.order && this.state.order.tracking) {
             const d = new Date();
             var formattedTime = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
             return (
