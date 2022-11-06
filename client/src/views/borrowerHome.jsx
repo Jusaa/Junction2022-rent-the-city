@@ -23,7 +23,7 @@ class BorrowerHome extends React.Component {
             <div className="App">
                 <div className="page-wrapper">
                     <div className="Search">
-                        <span class="page-header header1">Search</span>
+                        <span className="page-header header1">Search</span>
                         <input className="form-box form-search" type="text" id="search" name="search" placeholder="Search term" onChange={this.onSearch}/>
                     
                         <div className="SearchBottom"></div>
