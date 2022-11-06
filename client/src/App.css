@@ -158,7 +158,7 @@ a {
   color: #04A7E3;
 }
 
-.malibu { 
+.malibu {
   color: #7CDCF4;
 }
 
@@ -564,4 +564,43 @@ Single Item
   flex-direction: row;
   justify-content: space-evenly;
   padding: 10px 0px 10px 0px;
+}
+
+.order-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.order-wrapper > .body-small-txt {
+  margin: 0.5rem;
+}
+
+.order-wrapper > .page-header {
+  margin: 0;
+}
+
+.order-wrapper > .header3 {
+  color: #04A7E3;
+}
+
+.order-row-details {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+}
+
+.item-listing {
+  margin-left: 15px;
+}
+
+.line-break {
+  margin: 1.5rem;
+}
+
+.item-right {
+  margin-right: auto;
 }
