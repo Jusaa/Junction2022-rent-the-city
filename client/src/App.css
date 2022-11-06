@@ -34,8 +34,13 @@
 /* Hide the browser's default radio button */
 .container input {
   position: absolute;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
 }
 
 /* Create a custom radio button */
@@ -557,6 +562,6 @@ Single Item
 .role-selection {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 10px 0px 10px 0px;
 }

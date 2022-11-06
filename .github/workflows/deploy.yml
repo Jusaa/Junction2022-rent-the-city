@@ -13,11 +13,11 @@ jobs:
       - name: Install and build server
         working-directory: ./server
         run: |
-          npm install
+          npm ci
       - name: Install and build client
         working-directory: ./client
         run: |
-          npm install
+          npm ci
           npm run build
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: cp -R ./client/build ./server/public

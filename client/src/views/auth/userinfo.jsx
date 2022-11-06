@@ -28,11 +28,11 @@ class UserInfo extends React.Component {
           <div className="role-selection">
           <div className="container"> Lender
               <input type="radio" id="lender" name="role" onChange={this.setLender}/>
-              <span className="checkmark"></span>
+              {/*<span className="checkmark"></span>*/}
             </div>
             <div className="container"> Borrower
               <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
-              <span className="checkmark"></span>
+              {/*<span className="checkmark"></span>*/}
             </div>
         </div>
           <input className="form-box" type="text" id="name" name="name" placeholder="Name" onChange={this.setName}/>
