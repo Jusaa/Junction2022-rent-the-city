@@ -1,8 +1,6 @@
 import React from 'react'
-import Menu from './menu'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import ListGroup from 'react-bootstrap/ListGroup';
 
 class BorrowerHome extends React.Component {
     constructor(props) {
@@ -23,7 +21,6 @@ class BorrowerHome extends React.Component {
     render() {
         return (
             <div className="App">
-                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <div className="Search">
                         <p>Search for items to borrow:</p>
