@@ -34,7 +34,7 @@ class OrderInfo extends React.Component {
                     <div className="header2">Subtotal:</div>
                     <div>12.50€</div>
                     <a href="http://wolt.fi"> 
-                        <button className="button-xl">Order</button>
+                        <input className="action-btn  button-xxl" type="submit" value="Order!"></input>
                     </a>
                 </div>
             )
