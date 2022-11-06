@@ -10,14 +10,6 @@
   color: black;
 }
 
-button, input[type=submit] {
-  width: 65px;
-  height: 38px;
-  background: #7CDCF4;
-  border-radius: 1000px;
-  border: none;
-}
-
 .burgerMenu {
   width: 43px;
   height: 38px;
@@ -94,11 +86,8 @@ button, input[type=submit] {
     line-height: 16px;
     /* or 67% */
 
-    display: flex;
-    align-items: center;
-
     color: #FFFFFF;
-  
+    border-color: transparent;
 }
 
 .button-xxl-inverted {
@@ -117,9 +106,6 @@ button, input[type=submit] {
   font-size: 24px;
   line-height: 16px;
   /* identical to box height, or 67% */
-
-  display: flex;
-  align-items: center;
   text-align: center;
 
   color: #18A0FB;
@@ -140,9 +126,6 @@ button, input[type=submit] {
   font-size: 20px;
   line-height: 16px;
   /* identical to box height, or 80% */
-
-  display: flex;
-  align-items: center;
 }
 
 .button-xl-inverted {
@@ -160,11 +143,13 @@ button, input[type=submit] {
   line-height: 16px;
   /* identical to box height, or 80% */
 
-  display: flex;
-  align-items: center;
-
   /* Malibu */
   color: #7CDCF4;
+}
+
+.action-btn {
+  margin-top: 50px;
+  align-self: flex-end;
 }
 
 .radio-btn {
@@ -174,9 +159,6 @@ button, input[type=submit] {
   font-size: 20px;
   line-height: 16px;
   /* identical to box height, or 80% */
-
-  display: flex;
-  align-items: center;
   letter-spacing: 0.05em;
   color: #0E0E2C;
 }
@@ -234,10 +216,6 @@ button, input[type=submit] {
   font-size: 14px;
   line-height: 16px;
   /* or 114% */
-  
-  display: flex;
-  align-items: center;
-  
   color: #000000;
 }
 
@@ -248,10 +226,6 @@ button, input[type=submit] {
   font-size: 16px;
   line-height: 16px;
   /* identical to box height, or 100% */
-  
-  display: flex;
-  align-items: center;
-  
   color: #000000;
   
 }
@@ -263,19 +237,22 @@ button, input[type=submit] {
   font-size: 14px;
   line-height: 16px;
   /* identical to box height, or 114% */
-  
-  display: flex;
-  align-items: center;
-  
   color: #000000;
 }
 
-.item-main-image {
-  margin: auto;
+.description {
+  color: #04A7E3;
+  margin-bottom: 5px;
+  margin-left: -25px;
+  align-self: flex-start;
 }
 
 .item-card {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .item-card > img {
@@ -283,6 +260,53 @@ button, input[type=submit] {
   height: 177px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.description-block{
+  border-bottom: 2px solid #CCEDF9;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.description-block-row {
+  border-bottom: 2px solid #CCEDF9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+}
+
+.item-info-block {
+  max-width: 35vw;;
+}
+
+.item-description {
+ margin-left: 15px;
+ align-self: flex-start;
+ text-align: left;
+}
+
+.item-price {
+  align-self: flex-end;
+  text-align: right;
+  max-width: 35%;
+}
+
+.item-lender-info {
+  align-self: flex-end;
+  text-align: right;
+  max-width: 35%;
+}
+
+.raiting {
+  margin: 0px;
+  padding-top: -5px;
+}
+
+.raiting > .fa-star {
+  color: #FFEB00;
 }
 
 .ItemListItem {
