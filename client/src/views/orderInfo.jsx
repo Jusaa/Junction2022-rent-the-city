@@ -29,10 +29,10 @@ class OrderInfo extends React.Component {
                     <div className="tropical-blue line"></div>
                     <div className="header2">Delivery:</div>
                     <div className="body-small-txt"> - Address: {this.state.item.lender.user.address.street}, {this.state.item.lender.user.address.postalCode} {this.state.item.lender.user.address.city}</div>
-                    <div className="body-small-txt"> - Fee: 7.50€</div>
+                    <div className="body-small-txt"> - Fee: 8€</div>
                     <div className="tropical-blue line"></div>
                     <div className="header2">Subtotal:</div>
-                    <div>12.50€</div>
+                    <div>{this.state.item.pricePerDay + 8}€</div>
                     <a href="http://wolt.fi"> 
                         <input className="action-btn  button-xxl" type="submit" value="Order!"></input>
                     </a>
