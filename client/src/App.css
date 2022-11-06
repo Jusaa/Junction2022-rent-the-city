@@ -10,29 +10,6 @@
   color: black;
 }
 
-.Nav {
-  left: 0;
-  top: 0;
-  width: 100%;
-  background-color: cyan;
-  color: black;
-  position: absolute;
-}
-
-.SideNav {
-  right: 0;
-  height: 100%;
-  width: 100px;
-  background-color: cyan;
-  color: black;
-  position: absolute;
-}
-
-.NavItem {
-  position: relative;
-  display: inline;
-}
-
 button, input[type=submit] {
   width: 65px;
   height: 38px;
@@ -41,14 +18,28 @@ button, input[type=submit] {
   border: none;
 }
 
+.burgerMenu {
+  width: 43px;
+  height: 38px;
+  background: #7CDCF4;
+  border-radius: 1000px;
+  border: none;
+}
+
 .Search {
   top: 38px;
+  width: 100%;
   position: absolute;
+  border-bottom: 1px solid lightgrey;
+}
+
+.SearchBottom {
+  height: 1em;
 }
 
 .ItemList {
   overflow: scroll;
-  top: 130px;
+  top: 140px;
   position: absolute;
 }
 
@@ -292,4 +283,23 @@ button, input[type=submit] {
   height: 177px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 50%;
+}
+
+.ItemListItem {
+  display: flex;
+  overflow-y: hidden;
+  border-bottom: 1px solid lightgrey;
+}
+
+.ItemListItemPart {
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
+
+.menuButtonDivs {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
 }

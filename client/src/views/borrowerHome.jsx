@@ -1,5 +1,4 @@
 import React from 'react'
-import Menu from './menu'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -22,20 +21,22 @@ class BorrowerHome extends React.Component {
     render() {
         return (
             <div className="App">
-                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <div className="Search">
                         <p>Search for items to borrow:</p>
-                        <input type="text" id="search" name="search" onChange={this.onSearch} />
+                        <input type="text" id="search" name="search" onChange={this.onSearch}/>
+                        <div className="SearchBottom"></div>
                     </div>
                     <div className="ItemList">
                         {this.state && this.state.items && this.state.items.map((item) => {
                             if (item.name.includes(this.state.search)) {
                                 return (
                                     <Link to={`/borrower/item/${item.id}`}>
-                                        <div>
-                                            <img src={item.imageUrl} width="100" height="100" className="Image" />
-                                            <p>{item.name}, {item.description}</p>
+                                        <div className="ItemListItem">
+                                            <div className="ItemListItemPart Image">
+                                                <img src={item.imageUrl} width="50" height="50" />
+                                            </div>
+                                            <div className="ItemListItemPart">{item.name}, {item.description}</div>
                                         </div>
                                     </Link>
                                 )

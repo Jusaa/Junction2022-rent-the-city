@@ -15,7 +15,11 @@ class Menu extends React.Component {
         if (this.state.open) {
             return (
                 <div className="Nav">
-                    <button onClick={this.handleClick}>Menu</button>
+                    <button onClick={this.handleClick}>
+                        <div className="menuButtonDivs"></div>
+                        <div className="menuButtonDivs"></div>
+                        <div className="menuButtonDivs"></div>
+                    </button>
                     <div className="SideNav">
                         { this.props.logout &&
                             <Link className="NavItem" to="/">
@@ -27,16 +31,20 @@ class Menu extends React.Component {
                                 <button>Back</button>
                             </Link>
                         }
-                        { this.props.user &&
-                            <p className="NavItem">Logged in as {this.props.user}</p>
-                        }
                     </div>
                 </div>
             )
         } else {
             return (
                 <div className="Nav">
-                    <button onClick={this.handleClick}>Menu</button>
+                    { this.props.user &&
+                        <p className="NavItem">Logged in as {this.props.user}</p>
+                    }
+                    <button onClick={this.handleClick} className="burgerMenu">
+                        <div className="menuButtonDivs"></div>
+                        <div className="menuButtonDivs"></div>
+                        <div className="menuButtonDivs"></div>
+                    </button>
                 </div>
             )
         }
