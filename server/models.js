@@ -109,8 +109,8 @@ WoltShipment.belongsTo(Transport);
 
 class RentalEvent extends Model {};
 RentalEvent.init({
-    startDateTime: DataTypes.DATE,
-    endDateTime: DataTypes.DATE,
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
 },
 {
     sequelize, 
