@@ -15,7 +15,6 @@ const bookableItems = [
         description: 'Very good drill for making holes.',
         imageUrl: '/img/makitaDrill.jpg',
         pricePerDay: 5,
-        isAvailable: true,
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
     {
@@ -23,7 +22,6 @@ const bookableItems = [
         description: 'Very good saw for cutting stuff in pieces.',
         imageUrl: '/img/makitaSaw.png',
         pricePerDay: 6,
-        isAvailable: true,
         categories: [ { name: 'Tools', imageUrl: '/img/tools.jpg' }, ]
     },
     {
@@ -31,7 +29,6 @@ const bookableItems = [
         description: 'For your slipping and sliding needs',
         imageUrl: '/img/slip.jpeg',
         pricePerDay: 10,
-        isAvailable: true,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
     {
@@ -39,7 +36,6 @@ const bookableItems = [
         description: 'Horse your way to happiness',
         imageUrl: '/img/rocking.jpg',
         pricePerDay: 3,
-        isAvailable: true,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
     {
@@ -47,7 +43,6 @@ const bookableItems = [
         description: 'Scooter perfect for kids',
         imageUrl: '/img/rocking.jpg',
         pricePerDay: 4,
-        isAvailable: true,
         categories: [ { name: 'Toys', imageUrl: '/img/toys.jpg' }, ]
     },
 ];
