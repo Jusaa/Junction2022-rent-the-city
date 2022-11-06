@@ -9,17 +9,17 @@ const preBookItem = (itemName, lenderAddress, borrowerAddress) => {
   
 }
 
-const bookItemShipment = (itemName, lenderAddress, borrowerAddress) => {
+const bookItemShipment = (itemName, lenderAddress, borrowerAddress, lenderName, borrowerName, lenderPhone, borrowerPhone, lenderComment, borrowerComment) => {
     return axios.post(`https://daas-public-api.development.dev.woltapi.com/merchants/${MERCHANT_ID}/delivery-order`,
         {
             "pickup": {
               "location": {
                   "formatted_address": lenderAddress
               },
-              "comment": "The box is in front of the door",
+              "comment": lenderComment,
               "contact_details": {
-                "name": "John Doe",
-                "phone_number": "+358123456789",
+                "name": lenderName,
+                "phone_number": lenderPhone,
                 "send_tracking_link_sms": false
               }
             },
@@ -28,11 +28,11 @@ const bookItemShipment = (itemName, lenderAddress, borrowerAddress) => {
                 "formatted_address": borrowerAddress
               },
               "contact_details": {
-                "name": "John Doe's wife",
-                "phone_number": "+358123456789",
+                "name": borrowerName,
+                "phone_number": borrowerPhone,
                 "send_tracking_link_sms": false
               },
-              "comment": "Leave at the door, please"
+              "comment": borrowerComment
             },
             "customer_support": {
               "email": "string",
@@ -63,19 +63,17 @@ const bookItemShipment = (itemName, lenderAddress, borrowerAddress) => {
 }
 
 
-const bookItemReturn = (itemName, lenderAddress, borrowerAddress) => {
-  const date = new Date();
-  date.setDate(date.getDate() + 7);
+const bookItemReturn = (itemName, lenderAddress, borrowerAddress, lenderName, borrowerName, lenderPhone, borrowerPhone, lenderComment, borrowerComment, returnTime) => {
   return axios.post(`https://daas-public-api.development.dev.woltapi.com/merchants/${MERCHANT_ID}/delivery-order`,
       {
           "pickup": {
             "location": {
                 "formatted_address": borrowerAddress
             },
-            "comment": "The box is in front of the door",
+            "comment": borrowerComment,
             "contact_details": {
-              "name": "John Doe",
-              "phone_number": "+358123456789",
+              "name": borrowerName,
+              "phone_number": borrowerPhone,
               "send_tracking_link_sms": false
             }
           },
@@ -84,11 +82,11 @@ const bookItemReturn = (itemName, lenderAddress, borrowerAddress) => {
               "formatted_address": lenderAddress
             },
             "contact_details": {
-              "name": "John Doe's wife",
-              "phone_number": "+358123456789",
+              "name": lenderName,
+              "phone_number": lenderPhone,
               "send_tracking_link_sms": false
             },
-            "comment": "Leave at the door, please"
+            "comment": lenderComment
           },
           "customer_support": {
             "email": "string",
@@ -107,7 +105,7 @@ const bookItemReturn = (itemName, lenderAddress, borrowerAddress) => {
           ],
           "tips": [],
           "min_preparation_time_minutes": 10,
-          "scheduled_dropoff_time": date
+          "scheduled_dropoff_time": returnTime
         },
         {
           headers: {

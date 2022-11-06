@@ -327,3 +327,10 @@
     background-color: black;
     margin: 5px 0;
 }
+
+.line {
+  height: 1px;
+  background: #CCEDF9;
+  margin: 10px;
+  width: 90%;
+}
