@@ -43,7 +43,7 @@ class BorrowableItem extends React.Component {
                                     </div>
                                     <div className="description-block-row">
                                         <p className="header3 description">Lender</p>
-                                        <p className="body-txt item-price">{this.state.item.lender} Jukka Pulkkinen, Espoo
+                                        <p className="body-txt item-price">{this.state.item.lender.merchantName} Jukka Pulkkinen, Espoo
                                             <p className="raiting">
                                                 <span className="fa fa-star checked"></span>
                                                 <span className="fa fa-star checked"></span>
