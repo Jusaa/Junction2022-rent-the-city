@@ -54,15 +54,12 @@ class BorrowableItem extends React.Component {
                                         </p>
                                     </div>
                                 </div>
-                                <Link to="/borrower/home">
-                                    <input className="action-btn  button-xxl" type="submit" value="Rent"></input>
+                                <Link to={`/order/${window.location.pathname.split("/")[3]}`}>
+                                    <input className="action-btn  button-xxl" type="submit" value="Rent!"></input>
                                 </Link>
                             </div>
                         }
                     </div>
-                    <Link to={`/order/${window.location.pathname.split("/")[3]}`}>
-                        <button className="button-xl">Rent!</button>
-                    </Link>
                 </div>
             </div>
         )
