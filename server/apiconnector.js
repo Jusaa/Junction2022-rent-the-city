@@ -35,9 +35,9 @@ const bookItemShipment = (itemName, lenderAddress, borrowerAddress, lenderName, 
               "comment": borrowerComment
             },
             "customer_support": {
-              "email": "string",
-              "phone_number": "string",
-              "url": "string"
+              "email": "info@liivijengi.fi",
+              "phone_number": "+23243244223",
+              "url": "https://lingering-sun-6207.fly.dev/"
             },
             "merchant_order_reference_id": `yoooo${new Date()}`,
             "is_no_contact": true,
