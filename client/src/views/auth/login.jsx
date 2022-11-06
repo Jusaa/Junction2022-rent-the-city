@@ -48,12 +48,12 @@ class Login extends React.Component {
             <tr><td>
             {this.getUser().role == 'borrower' &&
               <Link to="/borrower/home">
-                <input type="submit" value="Log in!"></input>
+                <input className="button-xxl" type="submit" value="Log in!"></input>
               </Link>
             }
             {this.getUser().role == 'lender' &&
               <Link to="/lender/home">
-                <input type="submit" value="Log in!"></input>
+                <input className="button-xxl-inverted" type="submit" value="Log in!"></input>
               </Link>
             }
             </td></tr>

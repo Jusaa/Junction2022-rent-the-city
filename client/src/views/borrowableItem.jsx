@@ -22,10 +22,10 @@ class BorrowableItem extends React.Component {
             <div className="App">
                 <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
-                    <p>Item chosen</p>
-                    <div>
+                    
+                    <div className="item-main-image">
                         {this.state && this.state.item && 
-                            <div>
+                            <div className="item-card">  
                                 <img src={this.state.item.imageUrl} width="100" height="100" />
                                 <p>{this.state.item.name}, {this.state.item.description}</p>
                             </div>
