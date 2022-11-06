@@ -22,40 +22,17 @@ class Login extends React.Component {
 
   render () {
     return (
-    <div>
-        <form className="App">
-          <table>
-            <tr><td>
-              <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" onChange={this.setUsername}/>
-            </td></tr>
-            <tr><td>
-              <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" />
-            </td></tr>
-            <tr><td>
-            <div>
-              <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
-              <label htmlFor="lender">Borrower</label>
-            </div>
-            <div>
-              <input type="radio" id="lender" name="role" onChange={this.setLender}/>
-              <label htmlFor="lender">Lender</label>
-            </div>
-            </td></tr>
-            <tr><td>
-            {this.getUser().role == 'borrower' &&
-              <Link to="/borrower/home">
-                <input className="button-xxl" type="submit" value="Log in!"></input>
-              </Link>
-            }
-            {this.getUser().role == 'lender' &&
-              <Link to="/lender/home">
-                <input className="button-xxl-inverted" type="submit" value="Log in!"></input>
-              </Link>
-            }
-            </td></tr>
-          </table>
+    <div className="App">
+        <form className="page-wrapper">
+          <span className="page-header header1">Log in</span>
+          <input className="form-box" type="text" id="name" name="name" placeholder="User Name" onChange={this.setUsername}/>
+          <input className="form-box" type="password" id="password" name="password" placeholder="Password"/>
+              {this.getUser().role == 'borrower' &&
+                <Link to="/borrower/home">
+                  <input className="action-btn button-xl" type="submit" value="Log in!">
+                  </input>
+                </Link>
+              }
         </form>
     </div>
     )

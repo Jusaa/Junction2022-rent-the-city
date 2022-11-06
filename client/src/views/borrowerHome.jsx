@@ -21,28 +21,34 @@ class BorrowerHome extends React.Component {
     render() {
         return (
             <div className="App">
-                <div className="App">
+                <div className="page-wrapper">
                     <div className="Search">
-                        <p>Search for items to borrow:</p>
-                        <input type="text" id="search" name="search" onChange={this.onSearch}/>
+                        <span class="page-header header1">Search</span>
+                        <input className="form-box form-search" type="text" id="search" name="search" placeholder="Search term" onChange={this.onSearch}/>
+                    
                         <div className="SearchBottom"></div>
+                        <span className="result-txt body-txt">ALL RESULTS</span>
                     </div>
                     <div className="ItemList">
+                        
                         {this.state && this.state.items && this.state.items.map((item) => {
                             if (item.name.includes(this.state.search)) {
                                 return (
                                     <Link to={`/borrower/item/${item.id}`}>
-                                        <div className="ItemListItem">
-                                            <div className="ItemListItemPart Image">
-                                                <img src={item.imageUrl} width="50" height="50" />
-                                            </div>
-                                            <div className="ItemListItemPart">{item.name}, {item.description}</div>
-                                        </div>
+                                        <table className="ItemList">
+                                            <tr className="item-row">
+                                                <td className="ItemListItemPart Image"> <img src={item.imageUrl} width="50" height="50" /></td>
+                                                <td className="header2">{item.name}</td>
+                                                <td className="body-txt">{item.description}</td>
+                                            </tr>
+                                        </table>
                                     </Link>
                                 )
                             }
                             return null;
                         })}
+                          <input className="action-btn button-xl" type="submit" value="Show more!">
+                         </input>
                     </div>
                 </div>
             </div>
