@@ -8,17 +8,19 @@ class MainPage extends React.Component {
     render() {
         return (
             <div className="App">
-                <img className='logo' src='../img/Rently blue logo.png' />
-                <p className='header'>Rent The City..</p>
-                <div>
-                    <Link to="/login">
-                        <button>Log in</button>
-                    </Link>
-                </div>
-                <div>
-                    <Link to="/signup">
-                        <button>Sign up</button>
-                    </Link>
+                <div className="main-page-wrapper"> 
+                    <img className='logo' src='../img/Rently blue logo.png' />
+                    <p className='slogan header1'>Rent The City..</p>
+                    <div>
+                        <Link to="/login">
+                            <button className="button-xxl">Log in</button>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/signup">
+                            <button className="button-xxl-inverted">Sign up</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         )
