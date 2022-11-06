@@ -10,14 +10,6 @@
   color: black;
 }
 
-button, input[type=submit] {
-  width: 65px;
-  height: 38px;
-  background: #7CDCF4;
-  border-radius: 1000px;
-  border: none;
-}
-
 .burgerMenu {
   width: 43px;
   height: 38px;
@@ -94,7 +86,6 @@ button, input[type=submit] {
     line-height: 16px;
     /* or 67% */
 
-    display: flex;
     align-items: center;
 
     color: #FFFFFF;
@@ -118,7 +109,6 @@ button, input[type=submit] {
   line-height: 16px;
   /* identical to box height, or 67% */
 
-  display: flex;
   align-items: center;
   text-align: center;
 
@@ -141,7 +131,6 @@ button, input[type=submit] {
   line-height: 16px;
   /* identical to box height, or 80% */
 
-  display: flex;
   align-items: center;
 }
 
@@ -160,7 +149,6 @@ button, input[type=submit] {
   line-height: 16px;
   /* identical to box height, or 80% */
 
-  display: flex;
   align-items: center;
 
   /* Malibu */
@@ -302,4 +290,11 @@ button, input[type=submit] {
     height: 3px;
     background-color: black;
     margin: 5px 0;
+}
+
+.line {
+  height: 1px;
+  background: #CCEDF9;
+  margin: 10px;
+  width: 90%;
 }
