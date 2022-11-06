@@ -11,12 +11,12 @@ class MainPage extends React.Component {
                 <div className="main-page-wrapper"> 
                     <img className='logo' src='../img/Rently blue logo.png' />
                     <p className='slogan header1'>Rent The City..</p>
-                    <div>
+                    <div className="button-wrapper">
                         <Link to="/login">
                             <button className="button-xxl">Log in</button>
                         </Link>
                     </div>
-                    <div>
+                    <div className="button-wrapper">
                         <Link to="/signup">
                             <button className="button-xxl-inverted">Sign up</button>
                         </Link>
