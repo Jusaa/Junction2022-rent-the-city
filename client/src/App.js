@@ -8,6 +8,7 @@ import {
 import MainPage from './views/mainPage.jsx'
 import Login from './views/auth/login'
 import Signup from './views/auth/signup'
+import UserInfo from './views/auth/userinfo'
 import BorrowerHome from './views/borrowerHome'
 import LenderHome from './views/lenderHome'
 import BorrowableItem from './views/borrowableItem'
@@ -38,6 +39,7 @@ class App extends React.Component {
         <Routes>
           <Route path="/login" element={<Login setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
           <Route path="/signup" element={<Signup setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
+          <Route path="/signup/userinfo" element={<UserInfo setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
           <Route path="/borrower/home" element={<BorrowerHome getUser={this.getUser}/>}></Route>
           <Route path="/borrower/item/:id" element={<BorrowableItem getUser={this.getUser}/>}></Route>
           <Route path="/lender/home" element={<LenderHome getUser={this.getUser}/>}></Route>

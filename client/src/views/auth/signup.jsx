@@ -22,42 +22,19 @@ class Signup extends React.Component {
 
   render () {
     return (
-    <div>
-        <form className="App">
-          <table>
-            <tr><td>
-              <label htmlFor="name">Name:</label>
-              <input type="text" id="name" name="name" onChange={this.setUsername}/>
-            </td></tr>
-            <tr><td>
-              <label htmlFor="bank">Bank IBAN:</label>
-              <input type="text" id="bank" name="bank" />
-            </td></tr>
-            <tr><td>
-            <label htmlFor="address">Address:</label>
-            <input type="text" id="address" name="address" />
-            <div>
-              <input type="radio" id="borrower" name="role" defaultChecked onChange={this.setBorrower}/>
-              <label htmlFor="lender">Borrower</label>
-            </div>
-            <div>
-              <input type="radio" id="lender" name="role" onChange={this.setLender}/>
-              <label htmlFor="lender">Lender</label>
-            </div>
-            </td></tr>
-            <tr><td>
-            {this.getUser().role == 'borrower' &&
-              <Link to="/borrower/home">
-                <input type="submit" value="Sign up"></input>
-              </Link>
-            }
-            {this.getUser().role == 'lender' &&
-              <Link to="/lender/home">
-                <input type="submit" value="Sign up!"></input>
-              </Link>
-            }
-            </td></tr>
-          </table>
+    <div className="App">
+        <form className="page-wrapper">
+          <span className="page-header header1">Sign Up</span>
+          <input className="form-box" type="text" id="username" name="username" placeholder="User Name" onChange={this.setUsername}/>
+          <input className="form-box" type="password" id="password" name="password" placeholder="Password"/>
+          <input className="form-box" type="password" id="repeat-password" name="repeat-password" placeholder="Repeat Password"/>
+
+              {this.getUser().role == 'borrower' &&
+                <Link to="/signup/userinfo">
+                  <input className="action-btn button-xl" type="submit" value="Next">
+                  </input>
+                </Link>
+              }
         </form>
     </div>
     )
