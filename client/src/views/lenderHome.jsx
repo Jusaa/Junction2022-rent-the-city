@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Menu from './menu.jsx'
 
 class LenderHome extends React.Component {
     constructor(props) {
@@ -12,7 +11,6 @@ class LenderHome extends React.Component {
     render() {
         return (
             <div>
-                <Menu logout={true} user={this.getUser().name} className='Nav'></Menu>
                 <div className="App">
                     <p>List of my own items</p>
                     <ul className="App">
