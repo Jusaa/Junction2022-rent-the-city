@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class OrderInfo extends React.Component {
     constructor(props) {
@@ -32,7 +33,9 @@ class OrderInfo extends React.Component {
                     <div className="tropical-blue line"></div>
                     <div className="header2">Subtotal:</div>
                     <div>12.50€</div>
-                    <button className="button-xl">Order</button>
+                    <a href="http://wolt.fi"> 
+                        <button className="button-xl">Order</button>
+                    </a>
                 </div>
             )
         }
