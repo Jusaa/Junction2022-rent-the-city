@@ -22,7 +22,7 @@ class OrderInfo extends React.Component {
         return this.props.getUser();
     }
     render() {
-        if (this.state && this.state.item && this.state.order && this.state.order.tracking) {
+        if (this.state && this.state.item && this.state.order) {
             const d = new Date();
             var formattedTime = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
             return (
@@ -38,7 +38,7 @@ class OrderInfo extends React.Component {
                     <div className="tropical-blue line"></div>
                     <div className="header2">Subtotal:</div>
                     <div>{this.state.item.pricePerDay + 8}€</div>
-                    <a href={this.state.order.tracking.url}> 
+                    <a href={this.state.order.url}> 
                         <input className="action-btn  button-xxl" type="submit" value="Order!"></input>
                     </a>
                 </div>
