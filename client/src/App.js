@@ -14,41 +14,23 @@ import LenderHome from './views/lenderHome'
 import BorrowableItem from './views/borrowableItem'
 import OrderInfo from './views/orderInfo'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { user: { name: '', role: 'borrower' }};
-    this.setUsername = this.setUsername.bind(this)
-    this.setRole = this.setRole.bind(this)
-    this.getUser = this.getUser.bind(this)
-  }
-
-  setUsername(name) {
-    this.setState({ user: { name, role: this.state.user.role }})
-  }
-  setRole(role) {
-    this.setState({ user: { name: this.state.user.name, role }})
-  }
-  getUser() {
-    return this.state.user
-  }
-
-  render() {
-    return (
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
-          <Route path="/signup" element={<Signup setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
-          <Route path="/signup/userinfo" element={<UserInfo setUsername={this.setUsername} setRole={this.setRole} getUser={this.getUser}/>}></Route>
-          <Route path="/borrower/home" element={<BorrowerHome getUser={this.getUser}/>}></Route>
-          <Route path="/borrower/item/:id" element={<BorrowableItem getUser={this.getUser}/>}></Route>
-          <Route path="/lender/home" element={<LenderHome getUser={this.getUser}/>}></Route>
-          <Route path="/order/:id" element={<OrderInfo getUser={this.getUser}/>}></Route>
-          <Route path="/" element={<MainPage getUser={this.getUser}/>}></Route>
-        </Routes>
-      </Router>
-    );
-  }
+const App = () => {
+  const [name, setName] = React.useState('');
+  const [role, setRole] = React.useState('borrower');
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login setUsername={setName} setRole={setRole} getUser={{name, role}}/>}></Route>
+        <Route path="/signup" element={<Signup setUsername={setName} setRole={setRole} getUser={{name, role}}/>}></Route>
+        <Route path="/signup/userinfo" element={<UserInfo setUsername={setName} setRole={setRole} getUser={{name, role}}/>}></Route>
+        <Route path="/borrower/home" element={<BorrowerHome getUser={{name, role}}/>}></Route>
+        <Route path="/borrower/item/:id" element={<BorrowableItem getUser={{name, role}}/>}></Route>
+        <Route path="/lender/home" element={<LenderHome getUser={{name, role}}/>}></Route>
+        <Route path="/order/:id" element={<OrderInfo getUser={{name, role}}/>}></Route>
+        <Route path="/" element={<MainPage getUser={{name, role}}/>}></Route>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
